@@ -1,5 +1,5 @@
 import React, { Component, ComponentType, FC } from 'react'
-import { ModelBase } from 'local-lib/helper'
+import { ModelBase } from 'local-lib/src/helper'
 import { RoleKeyExternalSite, RoleKeyInternalSite } from '../Helper/RoleKey'
 import { authService } from 'partner-oidc-auth'
 

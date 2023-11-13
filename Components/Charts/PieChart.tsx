@@ -1,7 +1,7 @@
 import React, { Component, FC, useEffect, useState } from 'react'
 import { Chart, ArcElement, Tooltip, Legend, ChartData, ChartOptions } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
-import { FormatterUSD } from 'local-lib/helper'
+import { FormatterUSD } from 'local-lib/src/helper'
 import { IChartDataItem } from './type'
 
 Chart.register(ArcElement, Tooltip, Legend)

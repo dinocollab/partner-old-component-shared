@@ -12,7 +12,7 @@ import {
 import { Bar, ChartProps, Line } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js'
 import { faker } from '@faker-js/faker';
-import { FormatterUSD } from 'local-lib/helper';
+import { FormatterUSD } from 'local-lib/src/helper';
 
 ChartJS.register(
     CategoryScale,

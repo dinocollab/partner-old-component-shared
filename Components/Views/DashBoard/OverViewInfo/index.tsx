@@ -1,6 +1,6 @@
 import React, { Component, FC } from 'react'
 import { Box, Divider, Stack, Typography } from '@mui/material'
-import { CreateUseMediaQuery, FormatterUSD } from 'local-lib/helper'
+import { CreateUseMediaQuery, FormatterUSD } from 'local-lib/src/helper'
 import DataUsageOutlinedIcon from '@mui/icons-material/DataUsageOutlined'
 import { BarChart } from '../../../Charts/BarChart'
 import { ChartData, ChartDataset } from 'chart.js'

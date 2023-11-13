@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react'
 import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem } from '@mui/material'
-import * as SubLocal from 'local-lib/SubComponents'
+import * as SubLocal from 'local-lib/src/SubComponents/entry'
 import * as SubCommon from '../../../SubComponent'
 import { getErrorMessage } from '../../../Helper'
 import { AssetResourceType, ChannelResourceType, IReport, IReportPayment, ISelectModel, ResourceType } from '../../../Models'

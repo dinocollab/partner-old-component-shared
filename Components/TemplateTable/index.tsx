@@ -3,7 +3,7 @@ import React, { Component, ComponentClass, ComponentType, createContext } from '
 import { ConfigTable, CreateTable, DataTableProps, GridColDefCustom, GridInputComponentProps, TypeTableRef } from 'local-lib/GridTable';
 import { GridApi, GridCallbackDetails, GridRenderCellParams, GridSelectionModel, GridState } from '@mui/x-data-grid';
 import PanelAction, { IPanelActionProps, } from './PanelAction';
-import { ModelBase } from 'local-lib/helper';
+import { ModelBase } from 'local-lib/src/helper';
 import ItemRowMenu, { IItemRowMenuProps } from './ItemRowMenu';
 import InputFormModal, { InputFormType } from './InputFormModal';
 import FormTest from './FormTest';

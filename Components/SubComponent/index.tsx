@@ -31,7 +31,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 import { CSSProperties } from '@mui/styled-engine'
 import { ThemeContextValue } from 'react-bootstrap/esm/ThemeProvider'
-import { KeyExtractor } from 'local-lib/helper'
+import { KeyExtractor } from 'local-lib/src/helper'
 export interface FormBase<TModel> {
   MessageError?: PartialError<TModel>
   onBlur?: (keyName: string) => void

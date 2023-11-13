@@ -1,10 +1,10 @@
 import { Box, Button } from '@mui/material'
-import { PartialError } from 'local-lib/Views'
 import React, { Component } from 'react'
 import * as Sub from '../SubComponent'
 import * as SubCommon from '../../../SubComponent'
 import { IAssetReportView, IReport, IReportView } from '../../../Models'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import { PartialError } from 'local-lib/src/helper/ValidateModel'
 interface BillingDetailFormProps {
     data?: IAssetReportView
     MessageError?: PartialError<IReportView> | any

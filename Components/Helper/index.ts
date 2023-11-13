@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import { FormValidator, ModelBase } from "local-lib/helper";
-import { PartialError } from "local-lib/Views";
+import { FormValidator, ModelBase } from "local-lib/src/helper";
+import { PartialError } from "local-lib/src/Views/entry";
 import NoSleep from "nosleep.js";
 import ReactDOMServer from 'react-dom/server';
 export const isPromise = (object: any): object is Promise<unknown> => {

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { ApiAlertContext } from 'local-lib/Views'
+import { ApiAlertContext } from 'local-lib/src/Views/AlertGlobal'
 import { ApplicationPaths } from 'partner-oidc-auth'
 import { authService } from 'partner-oidc-auth'
 
