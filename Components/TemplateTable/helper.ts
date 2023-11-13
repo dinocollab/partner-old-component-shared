@@ -6,7 +6,7 @@ import {
   TypeTableRef,
   GridColDefCustom,
   ModelBase,
-} from "local-lib/GridTable";
+} from "local-lib/src/GridTable";
 export const CreateConfigTable = <TModel>(
   Config: ConfigTable<TModel>
 ): ConfigTable<TModel> => {
