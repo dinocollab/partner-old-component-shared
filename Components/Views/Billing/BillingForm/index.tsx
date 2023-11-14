@@ -12,6 +12,7 @@ interface BillingFormProps {
     Name?: string
     Actions?: JSX.Element
     IsEdit: boolean
+    fetchData: (value?: string, signal?: AbortSignal) => Promise<any[]>
 }
 export default class BillingForm extends Component<BillingFormProps> {
     render() {
@@ -26,6 +27,7 @@ export default class BillingForm extends Component<BillingFormProps> {
                             Model={this.props.data}
                             onBlur={this.props.onBlur} MessageError={this.props.MessageError}
                             Actions={this.props.Actions}
+                            fetchData={this.props.fetchData}
                         />
                     </SubCommon.BoxInfo>
                 </SubCommon.ErrorAll>
