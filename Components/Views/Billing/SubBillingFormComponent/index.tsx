@@ -4,11 +4,12 @@ import * as SubLocal from 'local-lib/src/SubComponents/entry'
 import * as SubCommon from '../../../SubComponent'
 import { getErrorMessage } from '../../../Helper'
 import { AssetResourceType, ChannelResourceType, IReport, IReportPayment, ISelectModel, ResourceType } from '../../../Models'
-import ComponentAdminService from '../../../../../ClientAdmin/src/Services/Admin/ComponentAdminService'
+// import ComponentAdminService from '../../../../../ClientAdmin/src/Services/Admin/ComponentAdminService'
 
 interface BillingInfoProps extends SubCommon.FormBase<IReport> {
   Actions?: JSX.Element
   IsEdit: boolean
+  fetchData: (value?: string, signal?: AbortSignal) => Promise<IReport[]>
 }
 
 const SelectUser = SubCommon.CreateSelect2<ISelectModel>()
@@ -27,7 +28,8 @@ export const BillingInfo: FC<BillingInfoProps> = (props) => {
             <input hidden defaultValue={props.Model?.Id} name="Id" />
             <SelectUser
               title="LabelName"
-              fetchData={ComponentAdminService.fetchLabelSelects}
+              // fetchData={props.fetchLabelSelects}
+              fetchData={props.fetchData}
               disabled={props.IsEdit}
               SelectValue={(m) => m.Id}
               GenerateLabel={(m) => m.Name}

@@ -4,19 +4,22 @@ import * as SubLocal from 'local-lib/src/SubComponents/entry'
 import * as SubCommon from '../../../SubComponent'
 import { getErrorMessage } from '../../../Helper'
 import { IAssetReportView, IReport, IReportView, ISelectModel } from '../../../Models'
-import ComponentAdminService from '../../../../../ClientAdmin/src/Services/Admin/ComponentAdminService'
+// import ComponentAdminService from '../../../../../ClientAdmin/src/Services/Admin/ComponentAdminService'
 
 interface BillingDetailProps extends SubCommon.FormBase<IAssetReportView> {
   Actions?: JSX.Element
   Report: IReport
+  fetchData: (value?: string, signal?: string) => Promise<IAssetReportView[]>
 }
 
 // const SelectMetaFile = SubCommon.CreateSelect2<ISelectModel>()
 const SelectAsset = SubCommon.CreateSelect2<ISelectModel>()
-const fetchAllAsset = (labelName: string) => {
-  return (value: string) => ComponentAdminService.fetchAssetSelects_V2(value, labelName)
-}
+
 export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
+  const fetchAllAsset = (labelName: string) => {
+    // return (value: string) => props.fetchAssetSelects_V2(value, labelName)
+    return (value: string) => props.fetchData(value, labelName)
+  }
   return (
     <SubCommon.WrapFrom Id={props.IdForm} onSubmit={props.onSubmit} IsForm={props.IsForm}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', maxWidth: '800px', justifyContent: 'space-between' }}>
