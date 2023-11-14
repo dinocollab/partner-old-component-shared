@@ -11,7 +11,8 @@ interface BillingDetailFormProps {
     onBlur: (key: string) => void
     Name?: string
     Actions?: JSX.Element
-    Report: IReport
+    Report: IReport,
+    fetchData: (value?: string, signal?: string) => Promise<any[]>
 }
 export default class BillingDetailForm extends Component<BillingDetailFormProps> {
     render() {
@@ -26,6 +27,7 @@ export default class BillingDetailForm extends Component<BillingDetailFormProps>
                             Model={this.props.data}
                             onBlur={this.props.onBlur} MessageError={this.props.MessageError}
                             Actions={this.props.Actions}
+                            fetchData={this.props.fetchData}
                         />
                     </SubCommon.BoxInfo>
                 </SubCommon.ErrorAll>
