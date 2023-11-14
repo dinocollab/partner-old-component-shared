@@ -1,6 +1,6 @@
 import { Box, SxProps, Theme } from '@mui/material'
 import React, { Component } from 'react'
-import LazySpinner from '../../../ClientAdmin/src/Redux/HocLazy/LazySpinner'
+import LazySpinner from '../Helper/LazySpinner'
 
 
 export type TActionLoadMore = (sender: FlexInfiniteScroll) => void
