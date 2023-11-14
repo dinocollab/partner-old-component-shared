@@ -9,7 +9,7 @@ import { AssetResourceType, ChannelResourceType, IReport, IReportPayment, ISelec
 interface BillingInfoProps extends SubCommon.FormBase<IReport> {
   Actions?: JSX.Element
   IsEdit: boolean
-  fetchData: (value?: string, signal?: AbortSignal) => Promise<IReport[]>
+  fetchData: (value?: string, signal?: AbortSignal) => Promise<any[]>
 }
 
 const SelectUser = SubCommon.CreateSelect2<ISelectModel>()

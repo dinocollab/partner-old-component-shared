@@ -9,7 +9,7 @@ import { IAssetReportView, IReport, IReportView, ISelectModel } from '../../../M
 interface BillingDetailProps extends SubCommon.FormBase<IAssetReportView> {
   Actions?: JSX.Element
   Report: IReport
-  fetchData: (value?: string, signal?: string) => Promise<IAssetReportView[]>
+  fetchData: (value?: string, signal?: string) => Promise<any[]>
 }
 
 // const SelectMetaFile = SubCommon.CreateSelect2<ISelectModel>()
