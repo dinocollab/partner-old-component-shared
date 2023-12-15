@@ -262,7 +262,7 @@ export const CreateSelect2 = function <TModel>() {
   return Select2
 }
 export interface MultipleSelect<TModel> extends SubLocal.ErrorProps {
-  fetchData: (value?: string, CancelToken?: CancelToken) => Promise<TModel[]>
+  fetchData: (value?: string, CancelToken?: AbortSignal) => Promise<TModel[]>
   SelectValue: (model: TModel) => any
   GenerateLabel: (model: TModel) => any
   Onchange?: (data: TModel[]) => void
@@ -281,7 +281,7 @@ export interface MultipleSelect<TModel> extends SubLocal.ErrorProps {
 export type TypeMultipleSelect<TModel> = React.ComponentType<MultipleSelect<TModel>>
 export const CreateMultipleSelect = function <TModel>() {
   const Select2: React.FC<MultipleSelect<TModel>> = (props) => {
-    const cancelToken = React.useRef<{ Token: CancelTokenSource }>({ Token: axios.CancelToken.source() })
+    const cancelToken = React.useRef<{ Token: AbortController }>({ Token: new AbortController() })
     const [isInitial, setIsInitial] = React.useState(true)
     const [data, setData] = React.useState<ReadonlyArray<any>>([])
     const [statusText, setStatusText] = React.useState('no items')
@@ -299,9 +299,9 @@ export const CreateMultipleSelect = function <TModel>() {
       callback: async function (value: any) {
         try {
           if (cancelToken.current) {
-            cancelToken.current.Token = axios.CancelToken.source()
+            cancelToken.current.Token =new AbortController()
           }
-          const dataTmp = await props.fetchData(value, cancelToken.current?.Token.token)
+          const dataTmp = await props.fetchData(value, cancelToken.current?.Token?.signal)
           setData(dataTmp)
         } catch (error) {
           console.log(error)
@@ -313,7 +313,7 @@ export const CreateMultipleSelect = function <TModel>() {
         this._timer = window.setTimeout(this.callback, this._second, text)
       },
       clear: function () {
-        cancelToken.current?.Token.cancel()
+        cancelToken.current?.Token.abort()
         clearTimeout(this._timer)
       },
     })
@@ -339,7 +339,7 @@ export const CreateMultipleSelect = function <TModel>() {
       let mounted = true
       const fetchInitial = async () => {
         try {
-          const data = await props.fetchData('', cancelToken.current?.Token.token)
+          const data = await props.fetchData('', cancelToken.current?.Token?.signal)
           if (!Array.isArray(data) || !mounted) return
           setData(data)
 
