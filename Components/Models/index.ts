@@ -271,10 +271,13 @@ export interface IJoinNetwork extends EntityTimeBase {
   ManagerId: string
   ManagerEmail: string
   ManagerName: string
+  ContractId?: string
+  ContractName?: string
   ContractOptionId?: string
   ContractOptionName?: string
   ContractOptionDescription?: string
 }
+
 export enum ReportStatus {
   Unpaid = 'Unpaid',
   Paid = 'Paid',
