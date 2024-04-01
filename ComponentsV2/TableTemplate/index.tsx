@@ -1,5 +1,7 @@
 import { IFetchModel, IFetchPagination, IConverterConfig } from './type'
 
+export {EOperator} from './type'
+
 export { TableTemplateContext } from './TableTemplateContext'
 export { TableConverter } from './TableConverter'
 export { TableFormatter } from './TableFormatter'
