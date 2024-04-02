@@ -318,6 +318,7 @@ export interface IReport extends EntityTimeBase {
   UserId: string
   DisplayName: string
   Email: string
+  ExchangeRate?: number
 }
 export interface IChannelResourceInfo {
   Name: string
