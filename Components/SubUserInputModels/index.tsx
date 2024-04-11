@@ -286,24 +286,23 @@ export const FormBusinessInfo: FC<FormBusinessInfoProps> = (props) => {
   )
 }
 
-export interface ITagData {
+interface ITagData {
   Title: string
 }
-
 interface FormTagsInfoProps extends UserFormBase {
   Actions?: JSX.Element
-  tags: ITagData[]
+  tags?: ITagData[]
 }
-
-// const TagData: ITagData[] = [{ Title: 'Buy content' }, { Title: 'Revenue' }]
+// const TagData = [{ Title: 'Buy content' }, { Title: 'Revenue' }]
 const Tags = SubCommon.CreateMultipleTags()
 export const FormTagsInfo: FC<FormTagsInfoProps> = (props) => {
+  const tagData: ITagData[] = props.tags ?? []
   return (
     <SubCommon.WrapFrom Id={props.IdForm} onSubmit={props.onSubmit} IsForm={props.IsForm}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', maxWidth: '800px', justifyContent: 'space-between' }}>
         <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
           <Tags
-            data={props.tags.map((option) => option.Title)}
+            data={tagData.map((option) => option.Title)}
             onBlur={() => props.onBlur && props.onBlur('Tags')}
             {...getErrorMessage(props.MessageError, 'Tags')}
             defaultValue={props.Model?.Tags ? JSON.parse(props.Model?.Tags) : undefined}
