@@ -17,7 +17,7 @@ import {
   TextField,
   TextFieldProps,
   Theme,
-  Typography,
+  Typography
 } from '@mui/material'
 import { getErrorMessage } from '../Helper'
 import * as SubLocal from 'local-lib/src/SubComponents/entry'
@@ -68,16 +68,17 @@ export const BoxInfo: FC<BoxInfoProps> = (props) => {
     <Box
       sx={{
         flex: 1,
-        padding: '10px',
+        padding: '12px',
         marginBottom: props.mb === false ? '0' : '20px',
-        ...(props.sx || {}),
+        border: 'none!important',
+        ...(props.sx || {})
       }}
       className={props.IsBorder === false ? '' : 'card'}
     >
       <ErrorAll MessageError={props.MessageError}>
         <Box sx={{ display: 'flex', alignItems: 'center', ...(props.sxTitle || {}) }}>
           <Box sx={{ marginRight: '8px' }}>{props.icon}</Box>
-          <Typography variant={props.variant || 'h5'} component="div">
+          <Typography variant={props.variant || 'h5'} component='div'>
             {props.title}
           </Typography>
           {props.TitleExtends}
@@ -95,13 +96,13 @@ export const BoxGroup: FC<BoxInfoProps> = (props) => {
         flex: 1,
         padding: '10px',
         marginBottom: props.mb === false ? '0' : '20px',
-        ...(props.sx || {}),
+        ...(props.sx || {})
       }}
       className={props.IsBorder === true ? 'card' : ''}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px', ...(props.sxTitle || {}) }}>
         <Box sx={{ margin: 0 }}>{props.icon}</Box>
-        <Typography variant={props.variant || 'h6'} component="div">
+        <Typography variant={props.variant || 'h6'} component='div'>
           {props.title}
         </Typography>
         {props.TitleExtends}
@@ -174,7 +175,7 @@ export const CreateSelect2 = function <TModel>() {
       clear: function () {
         abortController.current?.signalController.abort()
         clearTimeout(this._timer)
-      },
+      }
     })
     const Onchange = React.useCallback<React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>((event) => {
       setStatusText('Loading...')
@@ -246,11 +247,11 @@ export const CreateSelect2 = function <TModel>() {
               onBlur={props.onBlur}
               error={props.error}
               helperText={props.message}
-              autoComplete="off"
+              autoComplete='off'
               size={props.size}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'off', // disable autocomplete and autofill,
+                autoComplete: 'off' // disable autocomplete and autofill,
               }}
             />
           )}
@@ -299,7 +300,7 @@ export const CreateMultipleSelect = function <TModel>() {
       callback: async function (value: any) {
         try {
           if (cancelToken.current) {
-            cancelToken.current.Token =new AbortController()
+            cancelToken.current.Token = new AbortController()
           }
           const dataTmp = await props.fetchData(value, cancelToken.current?.Token?.signal)
           setData(dataTmp)
@@ -315,7 +316,7 @@ export const CreateMultipleSelect = function <TModel>() {
       clear: function () {
         cancelToken.current?.Token.abort()
         clearTimeout(this._timer)
-      },
+      }
     })
     const Onchange = React.useCallback<React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>((event) => {
       setStatusText('Loading...')
@@ -393,7 +394,7 @@ export const CreateMultipleSelect = function <TModel>() {
               helperText={props.message}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'off', // disable autocomplete and autofill,
+                autoComplete: 'off' // disable autocomplete and autofill,
               }}
             />
           )}
@@ -446,13 +447,13 @@ export const Chips: FC<ChipProps> = ({ data }) => {
         flexWrap: 'wrap',
         display: 'flex',
         justifyContent: 'center',
-        flex: 1,
+        flex: 1
       }}
     >
       {data?.map((option: string, index: number) => (
         <Chip
           key={KeyExtractor(option, index)}
-          size="small"
+          size='small'
           sx={{
             background: getColor(hashCode(option)),
             color: 'white',
@@ -462,9 +463,9 @@ export const Chips: FC<ChipProps> = ({ data }) => {
             fontSize: 10,
             height: '18px',
             marginRight: '2px',
-            boxSizing: 'border-box',
+            boxSizing: 'border-box'
           }}
-          variant="filled"
+          variant='filled'
           label={option}
         />
       )) ?? ''}
@@ -501,9 +502,9 @@ export const CreateMultipleTags = function () {
                   sx={{
                     borderColor: color,
                     color: color,
-                    fontWeight: 'bold',
+                    fontWeight: 'bold'
                   }}
-                  variant="outlined"
+                  variant='outlined'
                   label={option}
                   {...getTagProps({ index })}
                 />
@@ -520,7 +521,7 @@ export const CreateMultipleTags = function () {
               helperText={props.message}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'off', // disable autocomplete and autofill,
+                autoComplete: 'off' // disable autocomplete and autofill,
               }}
             />
           )}
@@ -589,7 +590,7 @@ export const LazyView: FC<LazyViewProps> = (props) => {
     <Box
       sx={{
         position: 'relative',
-        ...(props.sx || {}),
+        ...(props.sx || {})
       }}
     >
       {props.children}
@@ -603,7 +604,7 @@ export const LazyView: FC<LazyViewProps> = (props) => {
             right: 0,
             position: 'absolute',
             opacity: 0.8,
-            background: 'rgb(0 0 0 / 0.3)',
+            background: 'rgb(0 0 0 / 0.3)'
           }}
         >
           {props.IsLazy && props.showProgress !== false ? <LinearProgress /> : ''}
@@ -631,7 +632,7 @@ export const OverlayView: FC<OverlayViewProps> = (props) => {
         position: 'absolute',
         flex: 1,
         ...getConfig(),
-        background: 'white',
+        background: 'white'
       }}
     >
       {props.children}
@@ -674,7 +675,7 @@ export const InputSearch: FC<IInputSearchProps> = (props) => {
     clear: function () {
       this._controller.abort()
       clearTimeout(this._timer)
-    },
+    }
   })
   useEffect(() => {
     const _timer = timer.current
@@ -705,7 +706,7 @@ export const InputSearch: FC<IInputSearchProps> = (props) => {
         value={TextSearch}
         onChange={_onChange}
       />
-      <IconButton onClick={_onAction} type="submit" sx={{ p: '10px' }} aria-label="search">
+      <IconButton onClick={_onAction} type='submit' sx={{ p: '10px' }} aria-label='search'>
         {TextSearch ? <CloseIcon /> : <SearchIcon />}
       </IconButton>
     </Box>
@@ -747,7 +748,7 @@ export const PageContent: FC<PageContentProps> = (props) => {
     <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
       <Box sx={{ minHeight: 50, display: 'flex', justifyContent: 'flex-end', margin: '5px' }}>
         <Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
-          <Typography variant="h5">{props.Title}</Typography>
+          <Typography variant='h5'>{props.Title}</Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>{PanelAction}</Box>
       </Box>
@@ -801,7 +802,7 @@ export const SmallSelect: FC<SmallSelectProps> = (props) => {
     }
   }, [data, props])
   return (
-    <FormControl disabled={props.disabled} sx={{ minWidth: 120, ...(props.sx || {}) }} size="small">
+    <FormControl disabled={props.disabled} sx={{ minWidth: 120, ...(props.sx || {}) }} size='small'>
       <InputLabel id={props.id}>{props.title}</InputLabel>
       <Select
         labelId={props.id}
@@ -829,7 +830,7 @@ export const CenterBox: FC<ICenterBoxProps> = (props) => {
           display: 'flex',
           justifyContent: 'center',
           maxWidth: '1200px',
-          flexDirection: 'column',
+          flexDirection: 'column'
         }}
       >
         <Box sx={props.sx}>{props.children}</Box>
