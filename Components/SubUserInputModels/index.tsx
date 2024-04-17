@@ -1,70 +1,35 @@
 import React, { FC, useCallback, useRef, useState } from 'react'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import {
-  Autocomplete,
-  Avatar,
-  Box,
-  Checkbox,
-  Chip,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  IconButton,
-  Link,
-  Stack,
-  TextField
-} from '@mui/material'
-import { CopyAll, Edit, Lock } from '@mui/icons-material'
-import * as SubLocal from 'local-lib/src/SubComponents/entry'
-import * as ReactTrap from 'reactstrap'
+import { CardMedia, Typography } from '@mui/material'
+import { Avatar, Box, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Link, Stack } from '@mui/material'
+import { CopyAll, Edit } from '@mui/icons-material'
+import { ApiAlertContext } from 'local-lib/src/Views/entry'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faKey } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { ApiAlertContext } from 'local-lib/src/Views/entry'
-import { PartialError } from 'local-lib/src/helper/ValidateModel'
-import { ISelectModel, IUser, IContactInfo, IUserCreator } from '../Models'
-import { getErrorMessage } from '../Helper'
-import CopyToClipboard from '../CopyToClipboard'
-import { RoleKeyExternalSite, RoleKeyInternalSite } from '../Helper/RoleKey'
-import * as SubCommon from '../SubComponent'
-import { CancelToken } from 'axios'
-import './index.css'
-import InputFormBase, { InputFormContext } from '../TemplateTable/InputFormBase'
 import { FormValidator, SingleRuleValidate } from 'local-lib/src/helper/entry'
+import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { getErrorMessage } from '../Helper'
+import { ISelectModel, IUser, IContactInfo } from '../Models'
+import { RoleKeyExternalSite, RoleKeyInternalSite } from '../Helper/RoleKey'
+import InputFormBase, { InputFormContext } from '../TemplateTable/InputFormBase'
 import ContactInfoForm from './ContactInfoForm'
+import CopyToClipboard from '../CopyToClipboard'
+
+import * as ReactTrap from 'reactstrap'
+import * as SubCommon from '../SubComponent'
+import * as SubLocal from 'local-lib/src/SubComponents/entry'
+import './index.css'
+
 interface IAvatarCardProps {
   data?: IUser
   extract?: any
 }
+
 export const AvatarCard: FC<IAvatarCardProps> = (props) => {
   return (
     <Box sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
+      <CardMedia sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Avatar src={props.data?.Avatar} sx={{ width: 200, height: 200, margin: '10px' }} />
       </CardMedia>
-      {/* <Divider /> */}
-      {/* <CardActions sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <Button variant="outlined" startIcon={<Lock />}>
-                Lock
-            </Button>
-        </CardActions> */}
     </Box>
   )
 }
@@ -72,11 +37,11 @@ export const AvatarCard: FC<IAvatarCardProps> = (props) => {
 interface UserFormBase extends SubCommon.FormBase<IUser> {
   isAdmin?: Boolean
 }
-
 interface FormPersonalInfoProps extends UserFormBase {
   Actions?: JSX.Element
   IsEdit?: boolean
 }
+
 export const FormPersonalInfo: FC<FormPersonalInfoProps> = (props) => {
   const renderDisplayName = () => {
     if (props.IsEdit) {
@@ -131,7 +96,6 @@ export const FormPersonalInfo: FC<FormPersonalInfoProps> = (props) => {
             defaultValue={props.Model?.LastName}
           />
         </Grid>
-
         <Grid item xs={12} sm={6}>
           {props.isAdmin !== true ? <input name='UserName' hidden defaultValue={props.Model?.UserName} /> : ''}
           <SubLocal.InputOutline
@@ -606,13 +570,13 @@ export const AccountPermission: FC<IAccountPermissionProps> = (props) => {
           <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
             Admin site (Internal)
           </Typography>
-          <Stack sx={{ gap: '6px', px: '9px' }}>{renderInternalContent()}</Stack>
+          <Stack sx={{ ml: '3px' }}>{renderInternalContent()}</Stack>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
             Client site (Extenal)
           </Typography>
-          <Stack sx={{ gap: '6px' }}>{renderExternalContent()}</Stack>
+          <Stack sx={{ ml: '3px' }}>{renderExternalContent()}</Stack>
         </Grid>
         <Grid item xs={12}>
           {props.Actions}
