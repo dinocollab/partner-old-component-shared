@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef, useState } from 'react'
+import React, { Component, FC, useCallback, useRef, useState } from 'react'
 import { CardMedia, Typography } from '@mui/material'
 import { Avatar, Box, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Link, Stack } from '@mui/material'
 import { CopyAll, Edit } from '@mui/icons-material'
@@ -541,54 +541,54 @@ export const SocialInfo: FC<SocialInfoProps> = (props) => {
 interface IAccountPermissionProps extends UserFormBase {
   Actions?: JSX.Element
 }
-export const AccountPermission: FC<IAccountPermissionProps> = (props) => {
-  const MapCheck = new Set(props.Model?.Roles ?? [])
 
-  const renderInternalContent = () => {
-    return Object.values(RoleKeyInternalSite).map((role) => (
+export class AccountPermission extends Component<IAccountPermissionProps> {
+  get MapCheck() {
+    return new Set(this.props.Model?.Roles ?? [])
+  }
+
+  render() {
+    const internalRoles = Object.values(RoleKeyInternalSite)
+    const externalRoles = Object.values(RoleKeyExternalSite)
+    return (
+      <SubCommon.WrapFrom Id={this.props.IdForm} onSubmit={this.props.onSubmit} IsForm={this.props.IsForm}>
+        <Grid container spacing={2} sx={{ mt: 0 }}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
+              Admin site (Internal)
+            </Typography>
+            <Stack sx={{ ml: '3px' }}>{this.renderContent(internalRoles)}</Stack>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
+              Client site (Extenal)
+            </Typography>
+            <Stack sx={{ ml: '3px' }}>{this.renderContent(externalRoles)}</Stack>
+          </Grid>
+          <Grid item xs={12}>
+            {this.props.Actions}
+          </Grid>
+        </Grid>
+      </SubCommon.WrapFrom>
+    )
+  }
+
+  renderContent = (roles: RoleKeyInternalSite[] | RoleKeyExternalSite[]) => {
+    return roles.map((role) => (
       <FormControlLabel
         key={role}
-        control={<Checkbox defaultChecked={MapCheck.has(role)} name='Roles' value={role} />}
+        control={<Checkbox defaultChecked={this.MapCheck.has(role)} name='Roles' value={role} />}
         label={role}
       />
     ))
   }
-  const renderExternalContent = () => {
-    return Object.values(RoleKeyExternalSite).map((role) => (
-      <FormControlLabel
-        key={role}
-        sx={{ flex: 1 }}
-        control={<Checkbox defaultChecked={MapCheck.has(role)} name='Roles' value={role} />}
-        label={role}
-      />
-    ))
-  }
-  return (
-    <SubCommon.WrapFrom Id={props.IdForm} onSubmit={props.onSubmit} IsForm={props.IsForm}>
-      <Grid container spacing={2} sx={{ mt: 0 }}>
-        <Grid item xs={12} sm={6}>
-          <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
-            Admin site (Internal)
-          </Typography>
-          <Stack sx={{ ml: '3px' }}>{renderInternalContent()}</Stack>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant='caption' sx={{ fontWeight: 'bold' }}>
-            Client site (Extenal)
-          </Typography>
-          <Stack sx={{ ml: '3px' }}>{renderExternalContent()}</Stack>
-        </Grid>
-        <Grid item xs={12}>
-          {props.Actions}
-        </Grid>
-      </Grid>
-    </SubCommon.WrapFrom>
-  )
 }
+
 interface IUserCreatorProps extends UserFormBase {
   Actions?: JSX.Element
   fetchData: (value?: string, signal?: AbortSignal) => Promise<ISelectModel[]>
 }
+
 const SelectUser = SubCommon.CreateSelect2<ISelectModel>()
 
 export const UserCreator: FC<IUserCreatorProps> = (props) => {
