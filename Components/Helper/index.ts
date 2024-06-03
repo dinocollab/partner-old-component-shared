@@ -3,6 +3,13 @@ import { ModelBase } from "local-lib/src/GridTable";
 import { FormValidator, PartialError } from "local-lib/src/helper/entry";
 import NoSleep from "nosleep.js";
 import ReactDOMServer from 'react-dom/server';
+
+export const Sleep = (sec: number) => new Promise((resolve) => setTimeout(resolve, sec))
+export const FetchDelay = async function <TModel>(action: () => Promise<TModel>, sec: number) {
+  const [res] = await Promise.all([action(), Sleep(sec)])
+  return res
+}
+
 export const isPromise = (object: any): object is Promise<unknown> => {
   return typeof object === "object" && typeof object.then === "function";
 };
