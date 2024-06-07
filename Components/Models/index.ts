@@ -343,6 +343,7 @@ export interface IChannelReportView extends IReportView {
 }
 export interface IAssetReportView extends IReportView {
   Percentage: number
+  Label?: string
 }
 export enum EClaimRepository {
   Active = 'Active',
