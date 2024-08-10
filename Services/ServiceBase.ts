@@ -41,7 +41,7 @@ export default class ServiceBase {
   TryFetchToken = async (error: AxiosError, next: (error: AxiosError) => Promise<any>): Promise<any> => {
     const originalRequest = error.config
     if (error?.response?.status === 401 && originalRequest) {
-      await authService.userManager?.signinSilent()
+      await authService.signIn({})
       await this.InteruptHeader(originalRequest)
       return axios(originalRequest)
     }
