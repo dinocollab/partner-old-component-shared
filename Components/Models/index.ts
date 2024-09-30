@@ -247,6 +247,7 @@ export interface IFile {
   FolderName: string
   DateCreated: string
   Email: string
+  MetaFolderId: string
 }
 export enum EnumChannelType {
   Content = 'Content',
