@@ -240,14 +240,17 @@ export interface IUserReport {
 }
 export interface IFile {
   Id: string
-  Extension: string
   Name: string
+  Extension: string
   DriveFileId: string
   DisplayName: string
   FolderName: string
   DateCreated: string
-  Email: string
   MetaFolderId: string
+  Email: string
+  IsRerender: boolean
+  ReExtension: any
+  ReContentId: any
 }
 export enum EnumChannelType {
   Content = 'Content',
