@@ -251,6 +251,7 @@ export interface IFile {
   IsRerender: boolean
   ReExtension: any
   ReContentId: any
+  UserId: string
 }
 export enum EnumChannelType {
   Content = 'Content',
