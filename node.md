@@ -6,6 +6,10 @@ pnpm install dinodevfe/partner-old-component-shared
 
 git add .; git commit -m "update"; git push
 
+git reset --hard <commit-id>
+git push origin master --force
+
+
 ## Register link global
 
 pnpm link --global
