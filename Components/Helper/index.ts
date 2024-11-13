@@ -183,16 +183,15 @@ export function stringToColor(string: string) {
 }
 
 export function stringAvatar(name: string) {
-  let tmps = name?.split(" ") ?? ["@"]
-  const name1 = tmps[0] && tmps[0][0] ? tmps[0][0] : "@"
-  const name2 = tmps[0] && tmps[1][0] ? tmps[1][0] : ""
+  const tmps = name?.split(" ") ?? ["@"];   
+  const name1 = tmps[0]?.[0] || "@";      
+  const name2 = tmps[1]?.[0] || "";       
   return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name1}${name2}`,
+    sx: { bgcolor: stringToColor(name) },  
+    children: `${name1}${name2}`,         
   };
 }
+
 export const DeepClone = <TModel>(obj: TModel): TModel => {
   if (Array.isArray(obj)) {
     return obj.map(DeepClone) as TModel;
