@@ -133,6 +133,12 @@ export default class ServiceBase {
     }
   }
 
+  async TryPushNotify<TFunc extends (...param: any[]) => any>(action: TFunc, ...p: Parameters<TFunc>) {
+    try {
+      return await this.PushNotify(action, ...p)
+    } catch (err) {}
+  }
+
   async PushNotify<TFunc extends (...param: any[]) => any>(action: TFunc, ...p: Parameters<TFunc>) {
     try {
       return await action.bind(this)(...p)
