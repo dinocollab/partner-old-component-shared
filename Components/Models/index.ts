@@ -293,6 +293,7 @@ export enum ResourceType {
   AssetLabel = 'AssetLabel',
   ClaimedChannel = 'ClaimedChannel',
   ContentChannel = 'ContentChannel',
+  TrackMusic = 'TrackMusic',
 }
 const temp1 = { ...ResourceType }
 if ('AudioLabel' in temp1 || 'AssetLabel' in temp1) {
