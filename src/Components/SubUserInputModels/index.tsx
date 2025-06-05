@@ -3,6 +3,7 @@ import { CardMedia, Typography } from '@mui/material'
 import { Avatar, Box, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Link, Stack } from '@mui/material'
 import { CopyAll, Edit } from '@mui/icons-material'
 import { ApiAlertContext } from 'partner-local-lib/Views'
+//TODO : fix remove fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faKey } from '@fortawesome/free-solid-svg-icons'
 import { FormValidator, SingleRuleValidate } from 'partner-local-lib/helper'

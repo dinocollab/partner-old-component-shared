@@ -4,7 +4,7 @@ export const CreateConfigTable = <TModel>(Config: ConfigTable<TModel>): ConfigTa
   return Config
 }
 export const CreateConfigTableFromModel = <TModel>(data: TModel, SelectId: (data: TModel) => any): ConfigTable<TModel> => {
-  const keys = Object.keys(data)
+  const keys = Object.keys(data as any)
   const Options = keys.reduce<GridColDefCustom<TModel>>((config, key: keyof Extract<TModel, ModelBase>) => {
     config[key] = {
       flex: 1,

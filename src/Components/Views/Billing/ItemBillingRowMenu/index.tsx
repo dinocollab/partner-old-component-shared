@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/material'
 import { Delete, Edit } from '@mui/icons-material';
 import GridOnIcon from '@mui/icons-material/GridOn';
-import { IItemRowMenuProps } from 'component-shared/Components/TemplateTable/ItemRowMenu';
-import { IReport, ReportStatus } from 'component-shared/Components/Models';
-import MenuMore from 'component-shared/Components/Views/Billing/MenuMore';
 import PaidIcon from '@mui/icons-material/Paid';
+import { IItemRowMenuProps } from '../../../TemplateTable/ItemRowMenu';
+import { IReport, ReportStatus } from '../../../Models';
+import MenuMore from '../MenuMore';
 interface IItemBillingRowMenuProps extends IItemRowMenuProps {
     onDetail: (data: IReport) => void
     onPay?: (data: IReport) => void

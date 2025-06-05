@@ -8,9 +8,9 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import AudiotrackIcon from '@mui/icons-material/Audiotrack'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown'
 import SmartDisplayIcon from '@mui/icons-material/SmartDisplay'
-import { IItemSummary } from 'component-shared/Components/Models'
 import { AutoAwesomeMotion, Bookmark } from '@mui/icons-material'
-import { SkeletonLazyWrap } from 'component-shared/Components/SkeletonLazyView'
+import { IItemSummary } from '../../../Models'
+import { SkeletonLazyWrap } from '../../../SkeletonLazyView'
 
 interface IDashItem {
   Suffixes: string

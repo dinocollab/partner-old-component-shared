@@ -18,3 +18,6 @@ pnpm link --global
 
 pnpm link --global <source-name>
 pnpm link --global component-shared
+## publish to npm
+cd dist 
+npm publish

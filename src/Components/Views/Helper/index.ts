@@ -1,4 +1,4 @@
-import { IChannelResourceInfo } from "component-shared/Components/Models";
+import { IChannelResourceInfo } from "../../Models"
 
 export const ExtractChannelResourceInfo = (data: string) => {
     try {
