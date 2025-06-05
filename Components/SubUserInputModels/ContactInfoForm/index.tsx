@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material'
 import { Box, Button, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, { Component } from 'react'
 import * as SubCommon from '../../SubComponent'
-import * as SubLocal from "local-lib/src/SubComponents/entry";
+import * as SubLocal from "partner-local-lib/SubComponents/entry";
 import { getErrorMessage } from '../../Helper';
 import { IContactInfo } from '../../Models';
 interface ContactInfoFormProps extends SubCommon.FormBase<IContactInfo> {

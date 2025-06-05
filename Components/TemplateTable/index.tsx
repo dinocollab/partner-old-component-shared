@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import React, { Component, ComponentClass, ComponentType, createContext } from 'react'
-import { ConfigTable, CreateTable, DataTableProps, GridColDefCustom, GridInputComponentProps, ModelBase, TypeTableRef } from 'local-lib/src/GridTable';
+import { ConfigTable, CreateTable, DataTableProps, GridColDefCustom, GridInputComponentProps, ModelBase, TypeTableRef } from 'partner-local-lib/GridTable';
 import { GridApi, GridCallbackDetails, GridRenderCellParams, GridSelectionModel, GridState } from '@mui/x-data-grid';
 import PanelAction, { IPanelActionProps, } from './PanelAction';
 import ItemRowMenu, { IItemRowMenuProps } from './ItemRowMenu';

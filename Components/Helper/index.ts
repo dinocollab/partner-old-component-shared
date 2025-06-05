@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import { ModelBase } from "local-lib/src/GridTable";
-import { FormValidator, PartialError } from "local-lib/src/helper/entry";
+import { ModelBase } from "partner-local-lib/GridTable";
+import { FormValidator, PartialError } from "partner-local-lib/helper/entry";
 import NoSleep from "nosleep.js";
 import ReactDOMServer from 'react-dom/server';
 

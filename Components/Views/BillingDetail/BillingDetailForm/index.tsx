@@ -4,7 +4,7 @@ import * as Sub from '../SubComponent'
 import * as SubCommon from '../../../SubComponent'
 import { IAssetReportView, IReport, IReportView } from '../../../Models'
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
-import { PartialError } from 'local-lib/src/helper/ValidateModel'
+import { PartialError } from 'partner-local-lib/helper/ValidateModel'
 interface BillingDetailFormProps {
     data?: IAssetReportView
     MessageError?: PartialError<IReportView> | any

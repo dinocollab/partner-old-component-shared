@@ -20,7 +20,7 @@ import {
   Typography
 } from '@mui/material'
 import { getErrorMessage } from '../Helper'
-import * as SubLocal from 'local-lib/src/SubComponents/entry'
+import * as SubLocal from 'partner-local-lib/SubComponents/entry'
 import axios, { CancelToken, CancelTokenSource } from 'axios'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker, DesktopDatePicker } from '@mui/x-date-pickers'
@@ -30,8 +30,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 import { CSSProperties } from '@mui/styled-engine'
 import { ThemeContextValue } from 'react-bootstrap/esm/ThemeProvider'
-import { KeyExtractor } from 'local-lib/src/helper'
-import { PartialError } from 'local-lib/src/helper/ValidateModel'
+import { KeyExtractor } from 'partner-local-lib/helper'
+import { PartialError } from 'partner-local-lib/helper/ValidateModel'
 export interface FormBase<TModel> {
   MessageError?: PartialError<TModel>
   onBlur?: (keyName: string) => void

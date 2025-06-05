@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Box, FormControl, FormGroup } from '@mui/material'
-import * as SubLocal from 'local-lib/src/SubComponents/entry'
+import * as SubLocal from 'partner-local-lib/SubComponents/entry'
 import * as SubCommon from '../../../SubComponent'
 import { getErrorMessage } from '../../../Helper'
 import { IAssetReportView, IReport, IReportView, ISelectModel } from '../../../Models'

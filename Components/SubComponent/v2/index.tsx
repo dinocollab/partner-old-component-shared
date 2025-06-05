@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Box, SxProps, Theme, Typography } from '@mui/material'
 import { Variant } from '@mui/material/styles/createTypography'
-import * as SubLocal from 'local-lib/src/SubComponents/entry'
+import * as SubLocal from 'partner-local-lib/SubComponents/entry'
 import { getErrorMessage } from '../../Helper'
-import { PartialError } from 'local-lib/src/helper/ValidateModel'
+import { PartialError } from 'partner-local-lib/helper/ValidateModel'
 
 interface ErrorAllProps {
   MessageError?: PartialError<any>

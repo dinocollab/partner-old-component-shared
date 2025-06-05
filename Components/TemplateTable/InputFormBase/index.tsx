@@ -1,4 +1,4 @@
-import { FormValidator, PartialError } from 'local-lib/src/helper'
+import { FormValidator, PartialError } from 'partner-local-lib/helper'
 import React, { Component, FormEvent, createContext } from 'react'
 import { ConvertFormDataToJson, GetErrorFromResponse, SingleValidate } from '../../Helper'
 interface InputFormBaseProps<TModel> {
