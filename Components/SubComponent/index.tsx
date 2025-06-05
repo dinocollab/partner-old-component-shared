@@ -1,37 +1,15 @@
-import React, { Component, ComponentElement, ComponentType, FC, useCallback, useEffect, useRef, useState } from 'react'
-import {
-  Autocomplete,
-  Box,
-  Chip,
-  FormControl,
-  IconButton,
-  InputBase,
-  InputLabel,
-  LinearProgress,
-  MenuItem,
-  Paper,
-  Popper,
-  Select,
-  SelectChangeEvent,
-  SxProps,
-  TextField,
-  TextFieldProps,
-  Theme,
-  Typography
-} from '@mui/material'
+import React, { ComponentType, FC, useCallback, useEffect, useRef, useState } from 'react'
+import { MenuItem, Popper, Select, SelectChangeEvent, SxProps, TextField, Theme, Typography } from '@mui/material'
+import { Autocomplete, Box, Chip, FormControl, IconButton, InputBase, InputLabel, LinearProgress } from '@mui/material'
 import { getErrorMessage } from '../Helper'
-import * as SubLocal from 'partner-local-lib/SubComponents/entry'
-import axios, { CancelToken, CancelTokenSource } from 'axios'
+import * as SubLocal from 'partner-local-lib/SubComponents'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker, DesktopDatePicker } from '@mui/x-date-pickers'
+import { DatePicker } from '@mui/x-date-pickers'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { Variant } from '@mui/material/styles/createTypography'
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
-import { CSSProperties } from '@mui/styled-engine'
-import { ThemeContextValue } from 'react-bootstrap/esm/ThemeProvider'
-import { KeyExtractor } from 'partner-local-lib/helper'
-import { PartialError } from 'partner-local-lib/helper/ValidateModel'
+import { KeyExtractor, PartialError } from 'partner-local-lib/helper'
 export interface FormBase<TModel> {
   MessageError?: PartialError<TModel>
   onBlur?: (keyName: string) => void
@@ -344,9 +322,7 @@ export const CreateMultipleSelect = function <TModel>() {
           if (!Array.isArray(data) || !mounted) return
           setData(data)
 
-          const search = props.searchInitial
-            ? props.searchInitial
-            : (x: TModel) => props.defaultValue?.some((y) => y === props.SelectValue(x))
+          const search = props.searchInitial ? props.searchInitial : (x: TModel) => props.defaultValue?.some((y) => y === props.SelectValue(x))
 
           const Tmp = data.filter(search)
           if (Tmp) {
@@ -526,12 +502,7 @@ export const CreateMultipleTags = function () {
             />
           )}
         />
-        <input
-          ref={refInput}
-          defaultValue={props.defaultValue ? JSON.stringify(props.defaultValue) : ''}
-          hidden
-          name={props.name}
-        />
+        <input ref={refInput} defaultValue={props.defaultValue ? JSON.stringify(props.defaultValue) : ''} hidden name={props.name} />
       </>
     )
   }
@@ -571,9 +542,7 @@ export const DatePickers: FC<DatePickersProps> = (props) => {
         value={value}
         onChange={handleChange}
         disabled={props.disable}
-        renderInput={(params) => (
-          <TextField onBlur={props.onBlur} fullWidth {...params} error={props.error} helperText={props.message} />
-        )}
+        renderInput={(params) => <TextField onBlur={props.onBlur} fullWidth {...params} error={props.error} helperText={props.message} />}
       />
       <input ref={refInput} defaultValue={(props.defaultValue || new Date()).toISOString()} hidden name={props.name} />
     </LocalizationProvider>

@@ -2,10 +2,10 @@ import React, { Component, FC, useCallback, useRef, useState } from 'react'
 import { CardMedia, Typography } from '@mui/material'
 import { Avatar, Box, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, Link, Stack } from '@mui/material'
 import { CopyAll, Edit } from '@mui/icons-material'
-import { ApiAlertContext } from 'partner-local-lib/Views/entry'
+import { ApiAlertContext } from 'partner-local-lib/Views'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faKey } from '@fortawesome/free-solid-svg-icons'
-import { FormValidator, SingleRuleValidate } from 'partner-local-lib/helper/entry'
+import { FormValidator, SingleRuleValidate } from 'partner-local-lib/helper'
 import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { getErrorMessage } from '../Helper'
 import { ISelectModel, IUser, IContactInfo } from '../Models'
@@ -16,7 +16,7 @@ import CopyToClipboard from '../CopyToClipboard'
 
 import * as ReactTrap from 'reactstrap'
 import * as SubCommon from '../SubComponent'
-import * as SubLocal from 'partner-local-lib/SubComponents/entry'
+import * as SubLocal from 'partner-local-lib/SubComponents'
 import './index.css'
 
 interface IAvatarCardProps {
@@ -446,10 +446,7 @@ export const SocialInfo: FC<SocialInfoProps> = (props) => {
           Name: key
         }
         return (
-          <ReactTrap.ListGroupItem
-            key={key}
-            className='item-social d-flex justify-content-between align-items-center p-3 position-relative'
-          >
+          <ReactTrap.ListGroupItem key={key} className='item-social d-flex justify-content-between align-items-center p-3 position-relative'>
             <FontAwesomeIcon className='fa-lg ' color={(UserContact as any)[key].Color} icon={(UserContact as any)[key].Icon} />
             {contact.Link ? (
               <Link className='mb-0' href={contact.Link} target='_blank'>
@@ -575,11 +572,7 @@ export class AccountPermission extends Component<IAccountPermissionProps> {
 
   renderContent = (roles: RoleKeyInternalSite[] | RoleKeyExternalSite[]) => {
     return roles.map((role) => (
-      <FormControlLabel
-        key={role}
-        control={<Checkbox defaultChecked={this.MapCheck.has(role)} name='Roles' value={role} />}
-        label={role}
-      />
+      <FormControlLabel key={role} control={<Checkbox defaultChecked={this.MapCheck.has(role)} name='Roles' value={role} />} label={role} />
     ))
   }
 }

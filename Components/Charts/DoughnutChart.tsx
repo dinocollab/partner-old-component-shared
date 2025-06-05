@@ -1,5 +1,5 @@
-import { ChartData } from 'chart.js'
 import React, { Component } from 'react'
+import { ChartData } from 'chart.js'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { IChartDataItem } from './type'
@@ -9,7 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 const createChartData = (params: IChartDataItem[], labelName: string = '# of Votes') => {
   const initial: ChartData<'doughnut', number[], string> = {
     labels: [],
-    datasets: [{ label: labelName, borderWidth: 1, data: [], backgroundColor: [] as string[], borderColor: [] as string[] }],
+    datasets: [{ label: labelName, borderWidth: 1, data: [], backgroundColor: [] as string[], borderColor: [] as string[] }]
   }
   return params.reduce((acc, cur) => {
     acc.labels?.push(cur.label)
@@ -26,7 +26,7 @@ const defaultData: IChartDataItem[] = [
   { label: 'Yellow', data: 3, backgroundColor: 'rgba(255, 206, 86, 0.2)', borderColor: 'rgba(255, 206, 86, 1)' },
   { label: 'Green', data: 5, backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)' },
   { label: 'Purple', data: 2, backgroundColor: 'rgba(153, 102, 255, 0.2)', borderColor: 'rgba(153, 102, 255, 1)' },
-  { label: 'Orange', data: 3, backgroundColor: 'rgba(255, 159, 64, 0.2)', borderColor: 'rgba(255, 159, 64, 1)' },
+  { label: 'Orange', data: 3, backgroundColor: 'rgba(255, 159, 64, 0.2)', borderColor: 'rgba(255, 159, 64, 1)' }
 ]
 
 interface IProps {

@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 import { Box, FormControl, FormGroup } from '@mui/material'
-import * as SubLocal from 'partner-local-lib/SubComponents/entry'
+import * as SubLocal from 'partner-local-lib/SubComponents'
 import * as SubCommon from '../../../SubComponent'
 import { getErrorMessage } from '../../../Helper'
-import { IAssetReportView, IReport, IReportView, ISelectModel } from '../../../Models'
-// import ComponentAdminService from '../../../../../ClientAdmin/src/Services/Admin/ComponentAdminService'
+import { IAssetReportView, IReport, ISelectModel } from '../../../Models'
 
 interface BillingDetailProps extends SubCommon.FormBase<IAssetReportView> {
   Actions?: JSX.Element
@@ -23,11 +22,11 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
   return (
     <SubCommon.WrapFrom Id={props.IdForm} onSubmit={props.onSubmit} IsForm={props.IsForm}>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', maxWidth: '800px', justifyContent: 'space-between' }}>
-        <input hidden defaultValue={props.Model?.Id} name="Id" />
-        <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
-          <FormGroup className="group-input">
+        <input hidden defaultValue={props.Model?.Id} name='Id' />
+        <FormControl fullWidth sx={{ m: 1 }} variant='outlined'>
+          <FormGroup className='group-input'>
             <SelectAsset
-              title="AssetId"
+              title='AssetId'
               fetchData={fetchAllAsset(props.Report.ResourceId)}
               SelectValue={(m) => m.Id}
               GenerateLabel={(m) => m.Name}
@@ -41,15 +40,15 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
               onBlur={() => {
                 props.onBlur && props.onBlur('ResourceId')
               }}
-              name="ResourceId"
+              name='ResourceId'
             />
           </FormGroup>
         </FormControl>
-        <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
+        <FormControl sx={{ m: 1, width: '40ch' }} variant='outlined'>
           <SubLocal.InputOutline
             defaultValue={props.Model?.TotalMoney}
             MaxLength={250}
-            Title="TotalMoney"
+            Title='TotalMoney'
             maxRows={1}
             minRows={1}
             onBlur={() => props.onBlur && props.onBlur('TotalMoney')}
@@ -60,16 +59,16 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
               type: 'number',
               inputProps: {
                 maxLength: 250,
-                step: '0.01',
-              },
+                step: '0.01'
+              }
             }}
           />
         </FormControl>
-        <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
+        <FormControl sx={{ m: 1, width: '40ch' }} variant='outlined'>
           <SubLocal.InputOutline
             defaultValue={props.Model?.Views}
             MaxLength={250}
-            Title="Views"
+            Title='Views'
             maxRows={1}
             minRows={1}
             onBlur={() => props.onBlur && props.onBlur('Views')}
@@ -77,15 +76,15 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
             inputProps={{
               multiline: false,
               name: 'Views',
-              type: 'number',
+              type: 'number'
             }}
           />
         </FormControl>
-        <FormControl sx={{ m: 1, width: '40ch' }} variant="outlined">
+        <FormControl sx={{ m: 1, width: '40ch' }} variant='outlined'>
           <SubLocal.InputOutline
             defaultValue={props.Model?.Percentage ?? 25}
             MaxLength={250}
-            Title="Percentage"
+            Title='Percentage'
             maxRows={1}
             minRows={1}
             onBlur={() => props.onBlur && props.onBlur('Percentage')}
@@ -93,7 +92,7 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
             inputProps={{
               multiline: false,
               name: 'Percentage',
-              type: 'number',
+              type: 'number'
             }}
           />
         </FormControl>
@@ -118,7 +117,7 @@ export const BillingDetailInfo: FC<BillingDetailProps> = (props) => {
                     />
                 </FormGroup>
             </FormControl> */}
-        <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+        <FormControl fullWidth sx={{ m: 1 }} variant='outlined'>
           {props.Actions}
         </FormControl>
       </Box>
