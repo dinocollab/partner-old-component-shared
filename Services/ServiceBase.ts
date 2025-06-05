@@ -37,13 +37,17 @@ export default class ServiceBase {
       return this.InteruptHeader(req)
     })
   }
-
+  
   TryFetchToken = async (error: AxiosError, next: (error: AxiosError) => Promise<any>): Promise<any> => {
     const originalRequest = error.config
+    // Thử lại tối đa 3 lần khi gặp lỗi 401
     if (error?.response?.status === 401 && originalRequest) {
-      await authService.signIn({})
-      await this.InteruptHeader(originalRequest)
-      return axios(originalRequest)
+      (originalRequest as any)._retryCount = ((originalRequest as any)._retryCount || 0) + 1
+      if ((originalRequest as any)._retryCount <= 3) {
+        await authService.signIn({})
+        await this.InteruptHeader(originalRequest)
+        return axios(originalRequest)
+      }
     }
     return next(error)
   }
