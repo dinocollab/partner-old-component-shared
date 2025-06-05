@@ -1,6 +1,6 @@
 git add .; git commit -m "update"; git push
 
-pnpm install dinodevfe/partner-old-component-shared
+pnpm install dinocollab/partner-old-component-shared
 
 ## Git
 
