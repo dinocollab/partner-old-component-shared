@@ -28,9 +28,7 @@ function getAllFiles(dir, exts = ['.ts', '.tsx']) {
   })
   return results
 }
-const inputFiles = inputDirs.flatMap((dir) =>
-  fs.existsSync(dir) ? getAllFiles(dir).filter(f => !f.includes('node_modules')) : []
-)
+const inputFiles = inputDirs.flatMap((dir) => (fs.existsSync(dir) ? getAllFiles(dir).filter((f) => !f.includes('node_modules')) : []))
 
 module.exports = {
   input: inputFiles,
@@ -51,7 +49,8 @@ module.exports = {
       ]
     }),
     postcss({
-      extract: true, // xuất ra dist/index.css
+      extract: false, // nhúng CSS vào JS thay vì tách ra file riêng
+      inject: true, // tự động inject CSS vào <head>
       minimize: true,
       sourceMap: true,
       include: /node_modules|src/
@@ -62,15 +61,12 @@ module.exports = {
       babelHelpers: 'bundled',
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       include: ['src/**/*'],
-      presets: [
-        '@babel/preset-env',
-        ['@babel/preset-react', { runtime: 'automatic' }]
-      ]
+      presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }]]
     }),
     peerDepsExternal(),
     typescript({
       tsconfig: './tsconfig.json',
-      exclude: ['**/*.d.ts', 'src/**/*.js', 'src/**/*.css',/node_modules/],
+      exclude: ['**/*.d.ts', 'src/**/*.js', 'src/**/*.css', /node_modules/],
       declaration: true,
       declarationDir: 'dist',
       rootDir: 'src',
@@ -89,11 +85,11 @@ module.exports = {
         { src: 'src/types/clipboard-copy.d.ts', dest: 'dist/types' },
         { src: 'package.json', dest: 'dist' }
       ],
-      flatten: true, // Giữ nguyên cấu trúc thư mục
+      flatten: true // Giữ nguyên cấu trúc thư mục
     })
   ],
   external: [
-    '@faker-js/faker',
+    '@faker-js/faker'
     // Thêm các package ngoài vào đây nếu cần
   ]
 }
