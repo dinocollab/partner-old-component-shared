@@ -4,10 +4,13 @@ import { Avatar, Box, Checkbox, FormControlLabel, FormGroup, Grid, IconButton, L
 import { CopyAll, Edit } from '@mui/icons-material'
 import { ApiAlertContext } from 'partner-local-lib/Views'
 //TODO : fix remove fontawesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlobe, faKey } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faGlobe, faKey } from '@fortawesome/free-solid-svg-icons'
+// import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
+
+import { GlobeIcon, KeyIcon, FacebookIcon, GithubIcon, TwitterIcon, InstagramIcon } from '../Icons'
+
 import { FormValidator, SingleRuleValidate } from 'partner-local-lib/helper'
-import { faFacebook, faGithub, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { getErrorMessage } from '../Helper'
 import { ISelectModel, IUser, IContactInfo } from '../Models'
 import { RoleKeyExternalSite, RoleKeyInternalSite } from '../Helper/RoleKey'
@@ -419,11 +422,11 @@ interface SocialInfoProps {
 }
 
 const UserContact = {
-  WebSite: { Icon: faGlobe, Color: 'rgb(255, 193, 7)' },
-  GitHub: { Icon: faGithub, Color: '#333333' },
-  Twitter: { Icon: faTwitter, Color: '#55acee' },
-  Instagram: { Icon: faInstagram, Color: '#ac2bac' },
-  Facebook: { Icon: faFacebook, Color: '#3b5998' }
+  WebSite: { icon: <GlobeIcon sx={{ color: 'rgb(255, 193, 7)' }} /> },
+  GitHub: { icon: <GithubIcon sx={{ color: '#333333' }} /> },
+  Twitter: { icon: <TwitterIcon sx={{ color: '#55acee' }} /> },
+  Instagram: { icon: <InstagramIcon sx={{ color: '#ac2bac' }} /> },
+  Facebook: { icon: <FacebookIcon sx={{ color: '#3b5998' }} /> }
 }
 
 const FormValidate = new FormValidator<Partial<IContactInfo>>({
@@ -442,13 +445,10 @@ export const SocialInfo: FC<SocialInfoProps> = (props) => {
   const _renderSocialItem = useCallback(
     (data: any) => {
       return Object.keys(UserContact).map((key) => {
-        const contact = (data[key] as IContactInfo) ?? {
-          Platform: key,
-          Name: key
-        }
+        const contact = (data[key] as IContactInfo) ?? { Platform: key, Name: key }
         return (
           <ReactTrap.ListGroupItem key={key} className='item-social d-flex justify-content-between align-items-center p-3 position-relative'>
-            <FontAwesomeIcon className='fa-lg ' color={(UserContact as any)[key].Color} icon={(UserContact as any)[key].Icon} />
+            {(UserContact as any)[key].icon}
             {contact.Link ? (
               <Link className='mb-0' href={contact.Link} target='_blank'>
                 {contact.Name}
@@ -456,14 +456,12 @@ export const SocialInfo: FC<SocialInfoProps> = (props) => {
             ) : (
               <Typography>{contact.Name}</Typography>
             )}
-            {props.AllowEdit === true ? (
+            {props.AllowEdit && (
               <Box className='position-absolute btn-edit'>
                 <IconButton onClick={() => _onItemClick(key, contact)}>
                   <Edit color='info' />
                 </IconButton>
               </Box>
-            ) : (
-              ''
             )}
           </ReactTrap.ListGroupItem>
         )
@@ -499,7 +497,7 @@ export const SocialInfo: FC<SocialInfoProps> = (props) => {
           {_renderSocialItem(props.data?.ContactInfoMap ?? {})}
           {props.data?.AutoPassword ? (
             <ReactTrap.ListGroupItem className='d-flex justify-content-between align-items-center p-3'>
-              <FontAwesomeIcon className='fa-lg text-warning' icon={faKey} />
+              <KeyIcon color='warning' />
               <strong className='mb-0'>{props.data?.AutoPassword}</strong>
               <CopyToClipboard>
                 {({ copy }) => (

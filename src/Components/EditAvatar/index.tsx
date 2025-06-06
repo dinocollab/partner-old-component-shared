@@ -1,10 +1,10 @@
-import { Box, IconButton, SxProps, Theme } from '@mui/material'
-import Modal from '@mui/material/Modal'
-import React, { Component } from 'react'
 import './index.css'
-import Avatar from 'react-avatar-edit'
-import { CSSProperties } from '@mui/styles'
+import React, { Component } from 'react'
 import { Edit } from '@mui/icons-material'
+import { CSSProperties } from '@mui/styles'
+import { Box, IconButton, SxProps, Theme } from '@mui/material'
+import Avatar from 'react-avatar-edit'
+import Modal from '@mui/material/Modal'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 interface EditAvatarProps {
   sx?: SxProps<Theme>
