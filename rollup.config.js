@@ -28,6 +28,7 @@ function getAllFiles(dir, exts = ['.ts', '.tsx']) {
   })
   return results
 }
+
 const inputFiles = inputDirs.flatMap((dir) => (fs.existsSync(dir) ? getAllFiles(dir).filter((f) => !f.includes('node_modules')) : []))
 
 module.exports = {
@@ -49,8 +50,7 @@ module.exports = {
       ]
     }),
     postcss({
-      extract: false, // nhúng CSS vào JS thay vì tách ra file riêng
-      inject: true, // tự động inject CSS vào <head>
+      extract: true, // xuất ra dist/index.css
       minimize: true,
       sourceMap: true,
       include: /node_modules|src/
