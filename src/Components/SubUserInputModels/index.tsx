@@ -101,7 +101,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoProps> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          {props.isAdmin !== true ? <input name='UserName' hidden defaultValue={props.Model?.UserName} /> : ''}
+          {props.isAdmin !== true ? <input name='UserName' hidden defaultValue={props.Model?.UserName} /> : null}
           <SubLocal.InputOutline
             fullWidth
             variant='outlined'
@@ -117,6 +117,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoProps> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
+          {props.isAdmin !== true ? <input name='Email' hidden defaultValue={props.Model?.Email} /> : null}
           <SubLocal.InputOutline
             fullWidth
             variant='outlined'
@@ -161,7 +162,7 @@ export const FormPersonalInfo: FC<FormPersonalInfoProps> = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          {props.isAdmin !== true ? <input name='SigningDate' hidden defaultValue={props.Model?.SigningDate} /> : ''}
+          {props.isAdmin !== true ? <input name='SigningDate' hidden defaultValue={props.Model?.SigningDate} /> : null}
           <SubCommon.DatePickers
             fullWidth
             variant='outlined'
