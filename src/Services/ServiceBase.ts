@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import { authService } from 'partner-oidc-auth'
 import { HttpService } from './Getway'
+import { IFormOTPContext } from './types'
+import { Sleep } from '../Components/Helper'
 import { ProcessRepose } from './Getway/RequestHelper'
 
 interface ErrorModel {
@@ -19,30 +21,64 @@ const ProcessError = (err: AxiosError<ErrorModel>) => {
 export default class ServiceBase {
   _http = HttpService
   _urlBase = ''
-  /**
-   *
-   */
   constructor(http?: AxiosInstance) {
     if (http) {
       this._http = http
     }
     this.MapResponse()
   }
+
   MapResponse = () => {
     this._http.interceptors.response.use(
       (res) => res,
-      (err) => this.TryFetchToken(err, ProcessRepose)
+      (err) => this.HookResponse(err, ProcessRepose)
     )
     this._http.interceptors.request.use((req) => {
       return this.InteruptHeader(req)
     })
   }
-  
+
+  HookResponse = (error: AxiosError, next: (error: AxiosError) => Promise<any>) => {
+    if (error?.response?.status === 401) {
+      return this.TryFetchToken(error, next)
+    } else if (error?.response?.status === 400) {
+      return this.RequiredOTP(error, next)
+    }
+    return next(error)
+  }
+
+  RequiredOTP = async (error: AxiosError, next: (error: AxiosError) => Promise<any>) => {
+    const originalRequest = error.config
+    if (!originalRequest) return next(error)
+    const data = error.response?.data as { OTPRequired: boolean; Message: string }
+    if (data?.OTPRequired === true) {
+      const formOTPContext = (window as any).FormOTPContext as IFormOTPContext
+      const otp = await new Promise<string>((resolve, reject) => {
+        formOTPContext?.api?.open({
+          onComplete(otp) {
+            resolve(otp)
+            formOTPContext?.api?.close()
+          },
+          onClose() {
+            resolve('')
+          }
+        })
+      })
+      await Sleep(700)
+      if (!otp) {
+        return next(error)
+      }
+      originalRequest.headers = originalRequest.headers ?? {}
+      originalRequest.headers['X-OTP-Code'] = otp
+      return axios(originalRequest)
+    }
+  }
+
   TryFetchToken = async (error: AxiosError, next: (error: AxiosError) => Promise<any>): Promise<any> => {
     const originalRequest = error.config
     // Thử lại tối đa 3 lần khi gặp lỗi 401
     if (error?.response?.status === 401 && originalRequest) {
-      (originalRequest as any)._retryCount = ((originalRequest as any)._retryCount || 0) + 1
+      ;(originalRequest as any)._retryCount = ((originalRequest as any)._retryCount || 0) + 1
       if ((originalRequest as any)._retryCount <= 3) {
         await authService.signIn({})
         await this.InteruptHeader(originalRequest)
