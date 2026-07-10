@@ -3,8 +3,10 @@ import React, { PureComponent } from 'react'
 import UploadStatus from './UploadStatus'
 import { IProcessItem } from './types'
 import { UploadMonitor } from './UploadMonitor'
+import { IUploadLayoutContext, IUploadLayoutState, UploadLayoutContext } from './context'
 
 export * from './types'
+export * from './context'
 
 interface IUploadLayoutProps {
   Horizontal: 'end' | 'start'
@@ -16,25 +18,8 @@ interface IUploadLayoutProps {
   onClose?: (isCompleted: boolean) => void
   inline?: boolean
 }
-interface IUploadLayoutState {
-  open: boolean
-  showComfirm: boolean
-}
-export interface IUploadLayoutContext {
-  state: IUploadLayoutState
-  getErrors: () => IProcessItem[]
-  getComplete: () => IProcessItem[]
-  onItemClose: (item: IProcessItem) => void
-  onItemRetry: (item: IProcessItem) => void
-  onRetryAll: () => void
-  addItems: (items: Omit<IProcessItem, 'Value' | 'Signal'>[]) => void
-  Show: () => void
-  Close: () => void
-  items: IProcessItem[]
-  renderUploadContent: () => JSX.Element
-}
+
 export const Sleep = (sec: number) => new Promise((res) => setTimeout(res, sec))
-export const UploadLayoutContext = React.createContext<IUploadLayoutContext>({} as any)
 
 export default class UploadLayout
   extends PureComponent<React.PropsWithChildren<IUploadLayoutProps>, IUploadLayoutState>
@@ -44,7 +29,7 @@ export default class UploadLayout
     super(props)
     this.state = {
       open: props.open,
-      showComfirm: false,
+      showComfirm: false
     }
     this._monitor = new UploadMonitor(3, this.executor, this.getItem)
     this._monitor.addEventListen('Error', this.uploadError)
@@ -55,7 +40,7 @@ export default class UploadLayout
     Vertical: 'end',
     ContentHeight: 400,
     ContentWidth: 400,
-    open: false,
+    open: false
   }
   isUnmounted = false
   _monitor: UploadMonitor<IProcessItem>
@@ -167,7 +152,7 @@ export default class UploadLayout
             display: this.state.showComfirm ? 'flex' : 'none',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '20px',
+            padding: '20px'
           }}
         >
           <Box
@@ -176,14 +161,14 @@ export default class UploadLayout
               background: 'white',
               borderRadius: '10px',
               padding: '10px',
-              flexDirection: 'column',
+              flexDirection: 'column'
             }}
           >
             <Typography>There are files that have not been uploaded and they will not be uploaded!</Typography>
             <Box>
               <Button
                 sx={{ marginRight: '10px' }}
-                variant="contained"
+                variant='contained'
                 onClick={() => {
                   this.Close()
                   this.props.onClose && this.props.onClose(false)
@@ -191,7 +176,7 @@ export default class UploadLayout
               >
                 Yes
               </Button>
-              <Button variant="outlined" onClick={this.closeComfirm}>
+              <Button variant='outlined' onClick={this.closeComfirm}>
                 No
               </Button>
             </Box>
@@ -217,7 +202,7 @@ export default class UploadLayout
               top: this.props.Vertical === 'start' ? 0 : undefined,
               bottom: this.props.Vertical === 'end' ? 0 : undefined,
               left: this.props.Horizontal === 'start' ? 0 : undefined,
-              right: this.props.Horizontal === 'end' ? 0 : undefined,
+              right: this.props.Horizontal === 'end' ? 0 : undefined
             }}
           >
             {this.state.open ? this.renderUploadContent() : <></>}
