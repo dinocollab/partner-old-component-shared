@@ -51,27 +51,27 @@ export default class ServiceBase {
     const originalRequest = error.config
     if (!originalRequest) return next(error)
     const data = error.response?.data as { OTPRequired: boolean; Message: string }
-    if (data?.OTPRequired === true) {
-      const formOTPContext = (window as any).FormOTPContext as IFormOTPContext
-      const otp = await new Promise<string>((resolve, reject) => {
-        formOTPContext?.api?.open({
-          onComplete(otp) {
-            resolve(otp)
-            formOTPContext?.api?.close()
-          },
-          onClose() {
-            resolve('')
-          }
-        })
+    if (data?.OTPRequired !== true) return next(error)
+    const formOTPContext = (window as any).FormOTPContext as IFormOTPContext
+    const otp = await new Promise<string>((resolve, reject) => {
+      formOTPContext?.api?.open({
+        onComplete(otp) {
+          resolve(otp)
+          formOTPContext?.api?.close()
+        },
+        onClose() {
+          resolve('')
+        }
       })
-      await Sleep(700)
-      if (!otp) {
-        return next(error)
-      }
-      originalRequest.headers = originalRequest.headers ?? {}
-      originalRequest.headers['X-OTP-Code'] = otp
-      return axios(originalRequest)
+    })
+    await Sleep(700)
+    if (!otp) {
+      return next(error)
     }
+    originalRequest.headers = originalRequest.headers ?? {}
+    originalRequest.headers['X-OTP-Code'] = otp
+    // return axios(originalRequest)
+    return this._http(originalRequest)
   }
 
   TryFetchToken = async (error: AxiosError, next: (error: AxiosError) => Promise<any>): Promise<any> => {
@@ -123,7 +123,7 @@ export default class ServiceBase {
   }
   async Get<TModel>(url: string, config?: AxiosRequestConfig | undefined) {
     const response = await this._http.get<TModel>(url, await this.addCustomHeader(config))
-    return response.data
+    return response?.data
   }
   async TryGet<TModel>(url: string, config?: AxiosRequestConfig | undefined) {
     try {
@@ -134,7 +134,7 @@ export default class ServiceBase {
   }
   async Post<TModel>(url: string, data?: any, config?: AxiosRequestConfig | undefined) {
     const response = await this._http.post<TModel>(url, data, await this.addCustomHeader(config))
-    return response.data
+    return response?.data
   }
   async PostResponse<TModel>(url: string, data?: any, config?: AxiosRequestConfig | undefined) {
     const response = await this._http.post<TModel>(url, data, await this.addCustomHeader(config))
@@ -142,7 +142,7 @@ export default class ServiceBase {
   }
   async Put<TModel>(url: string, data?: any, config?: AxiosRequestConfig | undefined) {
     const response = await this._http.put<TModel>(url, data, await this.addCustomHeader(config))
-    return response.data
+    return response?.data
   }
 
   async TryPut<TModel>(url: string, data?: any, config?: AxiosRequestConfig | undefined) {
@@ -162,7 +162,7 @@ export default class ServiceBase {
   }
   async Delete<TModel>(url: string, config?: AxiosRequestConfig | undefined) {
     const response = await this._http.delete<TModel>(url, await this.addCustomHeader(config))
-    return response.data
+    return response?.data
   }
   async TryDelete<TModel>(url: string, config?: AxiosRequestConfig | undefined) {
     try {
